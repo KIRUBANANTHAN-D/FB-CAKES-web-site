@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FB CAKES - Orders</title>
+  <link rel="stylesheet" href="CSS/order.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">FB CAKES</div>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="contect.html">Contect</a></li>
+      <li><a href="order.html" class="active">Orders</a></li>
+    </ul>
+  </nav>
+
+  <h1 style="color: rgb(47, 46, 46);"><b>Customer Orders</b></h1>
+
+  <div id="orderList" class="order-list"></div>
+
+
+  <script>
+    let editIndex = null;
+
+    function loadOrders() {
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      let container = document.getElementById("orderList");
+      container.innerHTML = "";
+
+      if (orders.length === 0) {
+        container.innerHTML = `<p class='no-orders'>No orders placed yet.</p>`;
+        return;
+      }
+
+      orders.forEach((o, index) => {
+        let box = document.createElement("div");
+        box.className = "order-item";
+
+        box.innerHTML = `
+          <p><b>Order No:</b> ${o.billNo}</p>
+          <p><b>Cake:</b> ${o.cakeName} (${o.size} Kg)</p>
+          <p><b>Price:</b> Rs. ${o.price}</p>
+          <p><b>Message:</b> ${o.message}</p>
+          <p><b>Notes:</b> ${o.notes}</p>
+
+          <hr>
+
+          <p><b>Customer:</b> ${o.custName}</p>
+          <p><b>Phone:</b> ${o.custPhone}</p>
+          <p><b>Branch:</b> ${o.branch}</p>
+          <p><b>Pickup/Delivery:</b> ${o.type}</p>
+          ${o.address ? `<p><b>Address:</b> ${o.address}</p>` : ""}
+
+          <p><b>Time:</b> ${o.time}</p>
+          <hr>
+
+          <p><b>Payment:</b> ${o.payment}</p>
+          <p><b>Status:</b> 
+              <span id="status-${index}" style="color:${o.status === "Cancelled" ? "red" : "green"};">
+                ${o.status || "Confirmed"}
+              </span>
+          </p>
+
+          <button class="change-btn" onclick="openEdit(${index})">Change</button>
+
+          <button id="cancel-${index}" class="cancelBtn" ${o.status === "Cancelled" ? "disabled" : ""}>
+            ${o.status === "Cancelled" ? "Cancelled" : "Cancel Order"}
+          </button>
+
+          <button id="delete-${index}" class="deleteBtn" style="background:#ff0000; color:white;">
+            Delete
+          </button>
+        `;
+
+        container.appendChild(box);
+
+        // Cancel button function
+        document.getElementById(`cancel-${index}`).onclick = function () {
+          if (confirm("Are you sure you want to cancel this order?")) {
+            orders[index].status = "Cancelled";
+            localStorage.setItem("orders", JSON.stringify(orders));
+
+            document.getElementById(`status-${index}`).innerText = "Cancelled";
+            document.getElementById(`status-${index}`).style.color = "red";
+
+            this.innerText = "Cancelled";
+            this.disabled = true;
+          }
+        };
+
+        // Delete button function
+        document.getElementById(`delete-${index}`).onclick = function () {
+          if (confirm("Are you sure you want to DELETE this order?")) {
+            orders.splice(index, 1);
+            localStorage.setItem("orders", JSON.stringify(orders));
+            loadOrders();
+          }
+        };
+      });
+    }
+
+
+    // ----- EDIT FUNCTIONS -----
+
+    function openEdit(index) {
+      editIndex = index;
+
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      let o = orders[index];
+
+      document.getElementById("editName").value = o.cakeName;
+      document.getElementById("editSize").value = o.size;
+      document.getElementById("editPrice").value = o.price;
+      document.getElementById("editBranch").value = o.branch;
+
+      document.getElementById("editPopup").style.display = "flex";
+    }
+
+    function saveEdit() {
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+      orders[editIndex].cakeName = document.getElementById("editName").value;
+      orders[editIndex].size = document.getElementById("editSize").value;
+      orders[editIndex].price = document.getElementById("editPrice").value;
+      orders[editIndex].branch = document.getElementById("editBranch").value;
+
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      closeEdit();
+      loadOrders();
+    }
+
+    function closeEdit() {
+      document.getElementById("editPopup").style.display = "none";
+    }
+
+    loadOrders();
+  </script>
+
+
+  <!-- 🔵 SINGLE EDIT POPUP (WORKS 100%) -->
+  <div id="editPopup" class="edit-popup">
+    <div class="edit-box">
+
+      <h2>Edit Order</h2>
+
+      <label>Cake Name</label>
+      <input type="text" id="editName">
+
+      <label>Size (Kg)</label>
+      <input type="text" id="editSize">
+
+      <label>Price</label>
+      <input type="text" id="editPrice">
+
+      <label>Branch</label>
+      <input type="text" id="editBranch">
+
+      <button onclick="saveEdit()" class="saveBtn">Save Changes</button>
+      <button onclick="closeEdit()" class="closeBtn">Close</button>
+
+    </div>
+  </div>
+
+
+  <footer style="background:#ec0cda; color:white; text-align:center; padding:20px; margin-top:30px;">
+    © 2025 FB CAKES
+  </footer>
+
+</body>
+</html>

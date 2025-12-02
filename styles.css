@@ -1,0 +1,186 @@
+/* ==========================
+   GLOBAL STYLES
+=========================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #fff;
+  color: #333;
+}
+
+/* ==========================
+   NAVBAR
+=========================== */
+nav {
+  background: #ec0cda;
+  color: white;
+  padding: 14px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(255, 18, 183, 0.4);
+}
+
+nav .logo {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+nav ul li a {
+  color: rgb(8, 8, 8);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+nav ul li a:hover {
+  background: white;
+  color: #d800c3;
+}
+
+/* ==========================
+   HERO SECTION
+=========================== */
+.hero {
+  width: 100%;
+  height: 450px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+.hero h2 {
+  position: relative;
+  z-index: 2;
+  font-size: 28px;
+  color: #ffd2ec;
+  padding: 15px 30px;
+  background: rgba(0,0,0,0.4);
+  border-radius: 10px;
+  backdrop-filter: blur(3px);
+  text-align: center;
+  border-left: 4px solid #ff4ad0;
+  border-right: 4px solid #ff4ad0;
+}
+
+/* ==========================
+   SECTION WRAPPER
+=========================== */
+.menu {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* ==========================
+   BANNERS
+=========================== */
+.banner {
+  width: 90%;
+  height: 250px;
+  border-radius: 16px;
+  margin: auto;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.2);
+  transition: 0.3s ease-in-out;
+}
+
+.banner:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+}
+
+/* OFFER BANNER */
+.offers-banner {
+  background: url('../Assets/cakesoffer.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* PASTRY BANNER */
+.pastry-banner {
+  background: url('../Assets/fbpastry.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* ==========================
+   FOOTER
+=========================== */
+footer {
+  background: #ec0cda;
+  padding: 18px;
+  color: rgb(15, 15, 15);
+  font-weight: 600;
+  text-align: center;
+  margin-top: 40px;
+  border-top: 5px solid #ffb4f2;
+}
+
+/* ==========================
+   RESPONSIVE DESIGN
+=========================== */
+@media (max-width: 768px) {
+  nav ul {
+    gap: 12px;
+  }
+
+  nav .logo {
+    font-size: 22px;
+  }
+
+  .hero h2 {
+    font-size: 22px;
+    padding: 10px 20px;
+  }
+
+  .banner {
+    height: 200px;
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    padding: 10px 15px;
+  }
+
+  nav ul {
+    gap: 10px;
+  }
+
+  .hero {
+    height: 350px;
+  }
+
+  .hero h2 {
+    font-size: 18px;
+  }
+
+  .banner {
+    height: 170px;
+  }
+}

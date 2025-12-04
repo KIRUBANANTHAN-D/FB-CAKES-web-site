@@ -1,51 +1,53 @@
-/* ====== GENERAL PAGE SETTINGS ====== */
-body {
-  font-family: Arial, sans-serif;
-  background: #fff0fa;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f7f7f7;
   color: #333;
 }
 
-/* ====== NAVBAR ====== */
+/* ==========================
+   NAVBAR
+=========================== */
 nav {
-  background: #ec0cda;
-  padding: 12px 20px;
+  background: #ff4d6d;
+  color: #fff;
+  padding: 14px 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(255, 77, 109, 0.35);
 }
 
 nav .logo {
   font-size: 26px;
-  font-weight: bold;
-  color: white;
+  font-weight: 800;
 }
 
 nav ul {
   list-style: none;
   display: flex;
-  gap: 20px;
-  margin: 0;
+  gap: 25px;
 }
 
 nav ul li a {
   text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 5px 10px;
+  color: #ffe8ef;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
   transition: 0.3s;
 }
 
 nav ul li a:hover,
 nav ul li a.active {
-  background: white;
-  color: #ec0cda;
-  border-radius: 6px;
+  background: #fff;
+  color: #ff4d6d;
 }
-
 /* ====== SECTION HEADING ====== */
 .contact-section h1 {
   text-align: center;
@@ -69,7 +71,7 @@ nav ul li a.active {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-  border-left: 6px solid #ec0cda;
+  border-left: 6px solid #ff4d6d;
   transition: 0.3s;
 }
 
@@ -80,7 +82,7 @@ nav ul li a.active {
 
 .branch-card h3 {
   margin: 0 0 10px 0;
-  color: #ec0cda;
+  color: #ff4d6d;
   font-size: 20px;
 }
 

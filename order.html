@@ -21,10 +21,9 @@
     </ul>
   </nav>
 
-  <h1 style="color: rgb(47, 46, 46);"><b>Customer Orders</b></h1>
+  <h1 style="color:#333; text-align:center;"><b>Customer Orders</b></h1>
 
   <div id="orderList" class="order-list"></div>
-
 
   <script>
     let editIndex = null;
@@ -44,29 +43,34 @@
         box.className = "order-item";
 
         box.innerHTML = `
-          <p><b>Order No:</b> ${o.billNo}</p>
-          <p><b>Cake:</b> ${o.cakeName} (${o.size} Kg)</p>
+          <p><b>Bill No:</b> ${o.billNo}</p>
+          <p><b>Flovour:</b> ${o.name} </p>
+          <p><b>Weight: </b>${o.size} kg</p>
           <p><b>Price:</b> Rs. ${o.price}</p>
-          <p><b>Message:</b> ${o.message}</p>
-          <p><b>Notes:</b> ${o.notes}</p>
+          <p><b>Message:</b> ${o.msg || "-"}</p>
+          <p><b>Notes:</b> ${o.notes || "-"}</p>
 
           <hr>
 
-          <p><b>Customer:</b> ${o.custName}</p>
-          <p><b>Phone:</b> ${o.custPhone}</p>
+          <p><b>Customer:</b> ${o.customerName}</p>
+          <p><b>Phone:</b> ${o.customerPhone}</p>
           <p><b>Branch:</b> ${o.branch}</p>
           <p><b>Pickup/Delivery:</b> ${o.type}</p>
           ${o.address ? `<p><b>Address:</b> ${o.address}</p>` : ""}
 
-          <p><b>Time:</b> ${o.time}</p>
+          <p><b>Date:</b> ${o.time.split("T")[0]}</p>
+          <p><b>Time:</b> ${o.time.split("T")[1]}</p>
+
+
           <hr>
 
-          <p><b>Payment:</b> ${o.payment}</p>
-          <p><b>Status:</b> 
-              <span id="status-${index}" style="color:${o.status === "Cancelled" ? "red" : "green"};">
-                ${o.status || "Confirmed"}
-              </span>
+          <p><b>Payment:</b> ${o.method}</p>
+          <p><b>Order status: </b> 
+             <span id="status-${index}" style="color:${o.status === "Cancelled" ? "red" : "green"};">
+              ${o.status ? o.status : "Confirmed"}
+             </span>
           </p>
+
 
           <button class="change-btn" onclick="openEdit(${index})">Change</button>
 
@@ -74,16 +78,16 @@
             ${o.status === "Cancelled" ? "Cancelled" : "Cancel Order"}
           </button>
 
-          <button id="delete-${index}" class="deleteBtn" style="background:#ff0000; color:white;">
+          <button id="delete-${index}" class="deleteBtn" style="background:red; color:white;">
             Delete
           </button>
         `;
 
         container.appendChild(box);
 
-        // Cancel button function
+        // CANCEL
         document.getElementById(`cancel-${index}`).onclick = function () {
-          if (confirm("Are you sure you want to cancel this order?")) {
+          if (confirm("Cancel this order?")) {
             orders[index].status = "Cancelled";
             localStorage.setItem("orders", JSON.stringify(orders));
 
@@ -95,9 +99,9 @@
           }
         };
 
-        // Delete button function
+        // DELETE
         document.getElementById(`delete-${index}`).onclick = function () {
-          if (confirm("Are you sure you want to DELETE this order?")) {
+          if (confirm("Delete this order permanently?")) {
             orders.splice(index, 1);
             localStorage.setItem("orders", JSON.stringify(orders));
             loadOrders();
@@ -106,9 +110,7 @@
       });
     }
 
-
-    // ----- EDIT FUNCTIONS -----
-
+    // ----- EDIT -----
     function openEdit(index) {
       editIndex = index;
 
@@ -132,7 +134,6 @@
       orders[editIndex].branch = document.getElementById("editBranch").value;
 
       localStorage.setItem("orders", JSON.stringify(orders));
-
       closeEdit();
       loadOrders();
     }
@@ -144,8 +145,7 @@
     loadOrders();
   </script>
 
-
-  <!-- 🔵 SINGLE EDIT POPUP (WORKS 100%) -->
+  <!-- EDIT POPUP -->
   <div id="editPopup" class="edit-popup">
     <div class="edit-box">
 
@@ -168,7 +168,6 @@
 
     </div>
   </div>
-
 
   <footer style="background:#ec0cda; color:white; text-align:center; padding:20px; margin-top:30px;">
     © 2025 FB CAKES

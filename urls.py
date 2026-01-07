@@ -13,9 +13,7 @@ urlpatterns = [
     path("cakes/<int:id>/", cake_detail_api),
     path("categories/", category_list),
     path("branches/", branch_list),
-
-    # 🔥 ONE URL FOR GET + POST
     path("orders/", orders_api),
-
     path("orders/<int:pk>/cancel/", cancel_order),
 ]
+

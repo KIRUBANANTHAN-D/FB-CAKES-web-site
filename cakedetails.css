@@ -3,28 +3,23 @@
   gap: 40px;
   padding: 40px;
 }
-
 .cake-left img {
   width: 350px;
   border-radius: 10px;
 }
-
 .cake-right {
   width: 100%;
 }
-
 .option-row button {
   margin: 5px;
   padding: 8px 14px;
   border: 1px solid #ccc;
   cursor: pointer;
 }
-
 .option-row .active {
   background: #e91e63;
   color: white;
 }
-
 .next-btn {
   margin-top: 20px;
   padding: 10px 20px;

@@ -63,7 +63,7 @@ function CakeDetails() {
       weight: selectedWeight,
       egg_type: eggType,
       delivery_type: deliveryType,
-      address: address,          // ✅ added
+      address: address,         
       total: totalAmount
     })
   })
@@ -244,3 +244,4 @@ function CakeDetails() {
 }
 
 export default CakeDetails;
+

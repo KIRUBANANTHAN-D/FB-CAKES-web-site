@@ -11,7 +11,7 @@ function Home() {
   console.log("HOME COMPONENT RENDERED");
   return (
     <>
-      {/* HERO SECTION */}
+  
       <section className="hero">
         <Link
           to="/contact"
@@ -36,7 +36,6 @@ function Home() {
         </Link>
       </section>
 
-      {/* OFFERS */}
       <section className="menu">
         <Link to="/menu">
           <div
@@ -46,7 +45,7 @@ function Home() {
         </Link>
       </section>
 
-      {/* BEST SELLERS */}
+  
       <section className="menu">
         <Link to="/menu">
           <div
@@ -73,3 +72,4 @@ function Home() {
 }
 
 export default Home;
+

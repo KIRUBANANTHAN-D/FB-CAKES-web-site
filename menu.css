@@ -13,9 +13,6 @@ body {
   color: #333;
 }
 
-/* ==========================
-   NAVBAR
-=========================== */
 nav {
   background: #ffffff;
   color: #fff;
@@ -55,9 +52,6 @@ nav ul li a.active {
 }
 
 
-/* ------------------------------
-   MENU SECTION
------------------------------- */
 .menu {
   text-align: center;
   padding: 40px 25px;
@@ -91,11 +85,6 @@ nav ul li a.active {
   background: #ff4d6d;
   border-radius: 8px;
 }
-
-
-/* --------------------------------------------------------------------------------------*/
-
-
 .cake-card {
   width: 180px;   
   background: #ffffff;
@@ -118,7 +107,6 @@ nav ul li a.active {
   border-radius: 10px;
 }
 
-
 .cake-card h3 {
   font-size: 16px;
   margin-top: 8px;
@@ -127,7 +115,6 @@ nav ul li a.active {
   text-overflow: ellipsis;
 }
 
-
 .cake-card p {
   font-size: 15px;
   color: #000;
@@ -135,13 +122,12 @@ nav ul li a.active {
 }
 
 
-/* image wrapper */
 .cake-img {
   position: relative;
-  overflow: hidden;   /* VERY IMPORTANT */
+  overflow: hidden; 
 }
 
-/* BUY NOW – fully hidden */
+
 .buy-now {
   position: absolute;
   left: 50%;
@@ -154,14 +140,12 @@ nav ul li a.active {
   font-weight: 700;
   font-size: 14px;
   transition: all 0.4s ease;
-  opacity: 0;             /* EXTRA SAFETY */
+  opacity: 0;            
 }
 
-/* CARD hover */
 .cake-card:hover .buy-now {
   bottom: 15px;
   opacity: 1;
 }
 
 
-/* --------------------------------------------------------------------------------------*/

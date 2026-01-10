@@ -5,13 +5,11 @@ from .models import Category, Cake, Branch, Order
 from .serializers import CakeSerializer, OrderSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
-
 @api_view(['GET'])
 def cake_list_api(request):
     cakes = Cake.objects.all()
     serializer = CakeSerializer(cakes, many=True)
     return Response(serializer.data)
-
 @api_view(['GET'])
 def cake_detail_api(request, id):
     try:
@@ -25,13 +23,10 @@ def cake_detail_api(request, id):
         })
     except Cake.DoesNotExist:
         return Response({"error": "Cake not found"}, status=404)
-
-
 @api_view(['GET'])
 def category_list(request):
     categories = Category.objects.prefetch_related('cakes')
     data = []
-
     for cat in categories:
         data.append({
             "id": cat.id,
@@ -48,13 +43,10 @@ def category_list(request):
         })
 
     return Response(data)
-
-
 @api_view(['GET'])
 def branch_list(request):
     branches = Branch.objects.all()
     data = []
-
     for b in branches:
         data.append({
             "id": b.id,
@@ -66,20 +58,14 @@ def branch_list(request):
             "close_time": b.close_time,
             "is_main": b.is_main,
         })
-
     return Response(data)
-
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def orders_api(request):
-
-
     if request.method == 'GET':
         orders = Order.objects.filter(user=request.user).order_by('-created_at')
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data)
-
-
     if request.method == 'POST':
         serializer = OrderSerializer(data=request.data)
         if serializer.is_valid():
@@ -89,8 +75,6 @@ def orders_api(request):
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 @api_view(['PATCH'])
 @permission_classes([IsAuthenticated])
 def cancel_order(request, pk):
@@ -101,4 +85,3 @@ def cancel_order(request, pk):
         return Response({"message": "Order cancelled"})
     except Order.DoesNotExist:
         return Response({"error": "Order not found"}, status=404)
-
